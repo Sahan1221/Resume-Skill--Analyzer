@@ -22,20 +22,28 @@ app = FastAPI(
 )
 
 
+# CORS configuration for Vercel frontend and local development
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.frontend_origin],
+    allow_origins=[
+        "https://resume-skill-analyzer1.vercel.app",
+        "https://resume-skill-analyzer1-mdwuyt9gt-sahans-projects-a0fdd0db.vercel.app",
+        "http://localhost:5173",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 
+# Main API routes
 app.include_router(
     router,
     prefix="/api",
 )
 
+
+# Authentication routes
 app.include_router(
     auth_router,
     prefix="/api",
